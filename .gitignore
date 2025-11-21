@@ -1,0 +1,5 @@
+node_modules/
+.vscode/
+dist/
+public/*.tgz
+package-lock.json
