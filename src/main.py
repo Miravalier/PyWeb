@@ -1,16 +1,14 @@
-from pyodide.ffi import create_proxy
-from js import document
+from .dom import body, MouseEvent
 
 
-# The @create_proxy decorator allows this function to be used as
-# an event handler from JS code
-@create_proxy
-def on_click(event):
-    print("Text Clicked:", event.target.textContent)
+async def on_click(event: MouseEvent):
+    print("Event:", event)
+    print("Target:", event.target)
+    print("Position:", event.x, event.y)
+    print("Button:", event.button)
 
 
-# This gets called once the page finished loading
+# This gets called once the page has finished loading
 def main():
-    container = document.body.appendChild(document.createElement("div"))
-    container.textContent = "Example Text"
-    container.addEventListener("click", on_click)
+    example_text = body.add_child("p", classes=["example"], text="Example Text")
+    example_text.add_event_listener("click", on_click)
