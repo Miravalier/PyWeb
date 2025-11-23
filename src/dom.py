@@ -180,6 +180,18 @@ class HtmlElement:
     def text(self) -> str:
         return self.proxy_element.textContent
 
+    @text.setter
+    def text(self, value: str):
+        self.proxy_element.textContent = value
+
+    @property
+    def value(self) -> str:
+        return self.proxy_element.value
+
+    @value.setter
+    def value(self, value: str):
+        self.proxy_element.value = value
+
     @property
     def parent(self) -> HtmlElement:
         return HtmlElement(self.proxy_element.parentElement)
@@ -197,10 +209,6 @@ class HtmlElement:
             return self.proxy_element.dataset.pyids.split(",")
         except AttributeError:
             return []
-
-    @text.setter
-    def text(self, value: str):
-        self.proxy_element.textContent = value
 
     def delete(self):
         self.proxy_element.style.display = "none"
